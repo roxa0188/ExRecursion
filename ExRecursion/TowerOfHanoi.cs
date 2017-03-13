@@ -18,41 +18,23 @@ namespace ExRecursion
             {
                 Tower1.Push(i);
             }
+            Move(disk, Tower1, Tower2, Tower3);
         }
 
-        public void Solve()
+    
+
+        private void Move(int disk, Stack<int> TowerA, Stack<int> TowerB, Stack<int> TowerC)
         {
-            Move(Tower1, Tower2);
-        }
-
-        private bool Move(Stack<int> TowerA, Stack<int> TowerB)
-        {
-            int diskA;
-            int diskB;
-
-            try
-            {
-                diskA = TowerA.Peek();
-            } catch
-            {
-                diskA = 0;
-            }
-
-            try
-            {
-                diskB = TowerB.Peek();
-            }catch
-            {
-                diskB = 0;
-            }
-
-
-            if (diskA < diskB || diskB == 0)
+           if(disk == 1)
             {
                 TowerB.Push(TowerA.Pop());
-                return true;
+                return;
             }
-            else return false;
+
+            Move(disk - 1, TowerA, TowerC, TowerB);
+            TowerB.Push(TowerA.Pop());
+
+            Move(disk - 1, TowerC, TowerB, TowerA);
         }
 
 
